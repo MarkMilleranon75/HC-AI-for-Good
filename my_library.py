@@ -1,6 +1,6 @@
 def test_load():
   return 'loaded
-  
+
 def compute_probs(neg,pos):
   total = neg+pos
   p0 = neg/total
