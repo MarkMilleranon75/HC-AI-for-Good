@@ -1,6 +1,12 @@
 def test_load():
   return 'loaded'
 
+    def compute_probs(neg,pos):
+      total = neg+pos
+      p0 = neg/total
+      p1 = pos/total
+      return [p0,p1]
+
     def cond_prob(full_table, the_evidence_column, the_evidence_column_value, the_target_column, the_target_column_value):
       assert the_evidence_column in full_table    
       assert the_target_column in full_table  
