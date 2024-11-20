@@ -51,4 +51,3 @@ def naive_bayes(full_table, evidence_row, target_column):
   truenumerator=true2*true1
   neg, pos = compute_probs(falsenumerator, truenumerator)
   return[neg,pos]
-
