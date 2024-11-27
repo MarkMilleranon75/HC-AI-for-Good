@@ -52,3 +52,23 @@ def naive_bayes(full_table, evidence_row, target_column):
   neg, pos = compute_probs(falsenumerator, truenumerator)
   return[neg,pos]
 
+def metrics(zipped_list):
+  assert isinstance(zipped_list, list)
+  assert all([isinstance(v, list) for v in zipped_list])
+  assert all([len(v)==2 for v in zipped_list])
+  assert all([isinstance(a,(int,float)) and isinstance(b,(int,float)) for a,b in zipped_list]), f'zipped_list contains a non-int or non-float'
+  assert all([float(a) in [0.0,1.0] and float(b) in [0.0,1.0] for a,b in zipped_list]), f'zipped_list contains a non-binary value'
+  TN = sum([1 if pair==[0,0] else 0 for pair in zipped_list])
+  TP = sum([1 if pair==[1,1] else 0 for pair in zipped_list])
+  FP = sum([1 if pair==[1,0] else 0 for pair in zipped_list])
+  FN = sum([1 if pair==[0,1] else 0 for pair in zipped_list])
+  precision= TP/(TP+FP) if (TP+FP) >0 else 0
+  recall= TP/(TP+FN) if (TP+FN) >0 else 0
+  f1= 2 * (precision * recall) / (precision + recall) if (precision+recall) >0 else 0
+  accuracy= sum([1 if a==b else 0 for a,b in zipped_list])/len(zipped_list)
+  roundacc=round(accuracy, 2)
+  roundF1=round(f1, 2)
+  roundpre=round(precision,2)
+  roundrec=round(recall, 2)
+  return {'Accuracy':roundacc, 'F1':roundF1, 'Precision':roundpre, 'Recall':roundrec}
+
