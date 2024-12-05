@@ -95,17 +95,17 @@ def metrics(zipped_list):
     return result
     
   def run_random_forest(train, test, target, n):
-  assert target in train   
-  assert target in test
-  clf = RandomForestClassifier(n_estimators=n, max_depth=n, random_state=n)
-  all_mets=[]
-  for t in thresholds:
-    predictions = [1 if pos>t else 0 for pos in pos_probs]
-    pred_act_list = up_zip_lists(predictions, k_actuals)
-    mets = metrics(pred_act_list)
-    mets['Threshold'] = t
-    all_mets = all_mets + [mets]
-  metrics_table = up_metrics_table(all_mets)
-  return metrics_table
-
+    assert target in train   
+    assert target in test
+    clf = RandomForestClassifier(n_estimators=n, max_depth=n, random_state=n)
+    all_mets=[]
+    for t in thresholds:
+      predictions = [1 if pos>t else 0 for pos in pos_probs]
+      pred_act_list = up_zip_lists(predictions, k_actuals)
+      mets = metrics(pred_act_list)
+      mets['Threshold'] = t
+      all_mets = all_mets + [mets]
+    metrics_table = up_metrics_table(all_mets)
+    return metrics_table
+    
 
