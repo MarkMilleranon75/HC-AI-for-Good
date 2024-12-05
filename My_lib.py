@@ -72,13 +72,40 @@ def metrics(zipped_list):
   roundrec=round(recall, 2)
   return {'Accuracy':roundacc, 'F1':roundF1, 'Precision':roundpre, 'Recall':roundrec}
 
+  def generate_random(n):
+    random_weights = [round(uniform(-1, 1), 2) for i in range(n)]
+    return random_weights
+    
+  def node(inputs, weights):
+    assert isinstance(inputs,list)
+    assert isinstance(weights, list)
+    assert len(inputs)==len(weights)
+  
+    zipped = up_zip_lists(inputs,weights)
+    z = sum([x*y for x,y in zipped])
+    s = sigmoid(z) 
+    return s
+
   def feed_forward(net_weights, inputs):
     # slide left to right
     for layer in net_weights:
       output = [node(inputs, node_weights) for node_weights in layer]
       inputs = output  #the trick - make input the output of previous layer
     result = output[0]
-  
     return result
+    
+    def run_random_forest(train, test, target, n):
+  assert target in train   
+  assert target in test
+  clf = RandomForestClassifier(n_estimators=n, max_depth=n, random_state=n)
+  all_mets=[]
+  for t in thresholds:
+    predictions = [1 if pos>t else 0 for pos in pos_probs]
+    pred_act_list = up_zip_lists(predictions, k_actuals)
+    mets = metrics(pred_act_list)
+    mets['Threshold'] = t
+    all_mets = all_mets + [mets]
+  metrics_table = up_metrics_table(all_mets)
+  return metrics_table
 
 
