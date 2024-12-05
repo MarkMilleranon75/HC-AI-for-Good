@@ -1,22 +1,23 @@
-url ='https://docs.google.com/spreadsheets/d/e/2PACX-1vRWSIvVM7Nk-NsF2XSqibHxzypZkhP9nf9DFnSmQX9PJXzZfMpMLqqKvO70NqiA7mstFTXvpwXdWrrX/pub?output=csv'
-pima_table = up_get_table(url)
-
-target='Outcome'
-wrangled_pima=up_drop_column(pima_table, 'Insulin')
-wrangled_pima=up_drop_nan_rows(wrangled_pima)
-wrangled_pima=up_map_column(wrangled_pima, 'BloodPressure', {'low':0, 'medium':1, 'high':2})
-wrangled_pima=up_map_column(wrangled_pima, 'Region', {'A':0, 'B':1, 'C':2, 'D':3})
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'Pregnancies')
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'BMI')
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'Glucose')
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'SkinThickness')
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'DiabetesPedigreeFunction')
-wrangled_pima=up_apply_3sigma(wrangled_pima, 'Age')
-
-pima_train, pima_test = train, test = up_train_test_split(wrangled_pima, 'Outcome', .4)
-
-up_write_table(pima_train, 'pima_train.csv')
-
+def pima_train 
+  url ='https://docs.google.com/spreadsheets/d/e/2PACX-1vRWSIvVM7Nk-NsF2XSqibHxzypZkhP9nf9DFnSmQX9PJXzZfMpMLqqKvO70NqiA7mstFTXvpwXdWrrX/pub?output=csv'
+  pima_table = up_get_table(url)
+  
+  target='Outcome'
+  wrangled_pima=up_drop_column(pima_table, 'Insulin')
+  wrangled_pima=up_drop_nan_rows(wrangled_pima)
+  wrangled_pima=up_map_column(wrangled_pima, 'BloodPressure', {'low':0, 'medium':1, 'high':2})
+  wrangled_pima=up_map_column(wrangled_pima, 'Region', {'A':0, 'B':1, 'C':2, 'D':3})
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'Pregnancies')
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'BMI')
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'Glucose')
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'SkinThickness')
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'DiabetesPedigreeFunction')
+  wrangled_pima=up_apply_3sigma(wrangled_pima, 'Age')
+  
+  pima_train, pima_test = train, test = up_train_test_split(wrangled_pima, 'Outcome', .4)
+  
+  up_write_table(pima_train, 'pima_train.csv')
+  
 
 
 
