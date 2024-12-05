@@ -72,3 +72,13 @@ def metrics(zipped_list):
   roundrec=round(recall, 2)
   return {'Accuracy':roundacc, 'F1':roundF1, 'Precision':roundpre, 'Recall':roundrec}
 
+  def feed_forward(net_weights, inputs):
+    # slide left to right
+    for layer in net_weights:
+      output = [node(inputs, node_weights) for node_weights in layer]
+      inputs = output  #the trick - make input the output of previous layer
+    result = output[0]
+  
+    return result
+
+
