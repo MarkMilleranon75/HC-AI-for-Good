@@ -94,7 +94,7 @@ def metrics(zipped_list):
     result = output[0]
     return result
     
-    def run_random_forest(train, test, target, n):
+  def run_random_forest(train, test, target, n):
   assert target in train   
   assert target in test
   clf = RandomForestClassifier(n_estimators=n, max_depth=n, random_state=n)
