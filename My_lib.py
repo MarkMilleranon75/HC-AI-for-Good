@@ -107,5 +107,20 @@ def metrics(zipped_list):
       all_mets = all_mets + [mets]
     metrics_table = up_metrics_table(all_mets)
     return metrics_table
-    
 
+  def try_archs(train_table, test_table, target_column_name, architectures, thresholds):
+    for arch in all_architectures:
+      probs = up_neural_net(scaled_train, scaled_test, arch, target)
+      pos_probs = [pos for neg,pos in probs]
+    all_mets=[]
+    for t in thresholds:
+      predictions = [1 if pos>t else 0 for pos in pos_probs]
+      pred_act_list = up_zip_lists(predictions, k_actuals)
+      mets = metrics(pred_act_list)
+      mets['Threshold'] = t
+      all_mets = all_mets + [mets]
+      print(f'Architecture: {arch}')
+      display(up_metrics_table(all_mets))
+    return arch_acc_dict
+      
+  
