@@ -110,7 +110,7 @@ def metrics(zipped_list):
 
   def try_archs(train_table, test_table, target_column_name, architectures, thresholds):
     for arch in all_architectures:
-      probs = up_neural_net(scaled_train, scaled_test, arch, target)
+      probs = up_neural_net(train_table, test_table, arch, target)
       pos_probs = [pos for neg,pos in probs]
     all_mets=[]
     for t in thresholds:
@@ -122,5 +122,3 @@ def metrics(zipped_list):
       print(f'Architecture: {arch}')
       display(up_metrics_table(all_mets))
     return arch_acc_dict
-      
-  
