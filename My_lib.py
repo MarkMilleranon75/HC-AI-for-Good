@@ -95,6 +95,8 @@ def metrics(zipped_list):
     return result
     
   def run_random_forest(train, test, target, n):
+    k_feature_table = up_drop_column(test, 'target')
+    k_actuals = up_get_column(test, 'target')
     assert target in train   
     assert target in test
     clf = RandomForestClassifier(n_estimators=n, max_depth=n, random_state=n)
